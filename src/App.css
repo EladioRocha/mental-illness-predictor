@@ -1,38 +1,355 @@
-.App {
-  text-align: center;
+#root {
+  height: 100%;
+  width: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+a {
+  text-decoration: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body, html, * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: DejaVu Sans Mono, monospace;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body {
+  overflow-x: hidden;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-image: url('./assets/images/bg.jpg');
+  background-size: cover;
+}
+
+.quiz-container {
+  display:flex;
+  flex-direction: column;
+  width: 75%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.main-container {
+  background-color: #00cedb;
+  width: 100%;
+  height: 75%;
+  margin: auto;
+}
+
+/*********************** HEADER CONTAINER ***********************************/
+
+.header-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 10%;
+  -webkit-box-shadow: 0px 1px 0px 0px #CFFFFE; 
+  box-shadow: 0px 1px 0px 0px #CFFFFE;
+}
+
+.profile-container {
+  width: 50%;
+  height: 100%;
+}
+
+.profile-icon {
+  background-color: #A2F1F5;
+  background-image: url('./assets/images/svg/brain.svg');
+  background-repeat: no-repeat;
+  background-size: 80%;
+  background-position: center;
+  height: 5vh;
+  width: 5vh;
+  border-radius: 100%
+}
+
+.progress-container {
+  width: 100%;
+  height: 100%;
+}
+
+.progress-bar {
+  width: 100%;
+}
+
+.info-container {
+  width: 100%;
+  height: 100%;
+  padding: 0 10% 0 10%;
+  scrollbar-width: thin;
+}
+
+.info-container::-webkit-scrollbar {
+  display: none;
+}
+
+/*********************** BODY CONTAINER ***********************************/
+
+.body-container {
+  width: 100%;
+  height: 70%;
+}
+
+.question-text {
+  color: white;
+  height: 5%;
+}
+
+.answers-container {
+  position: relative;
+  height: 90%;
+}
+
+.answer-btn {
+  width: 100%;
+  height: 10%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border: 1px solid #71f5fc;
+  color: #ffffff;
+}
+
+.answer-btn:hover {
+  background-position: 0 0;
+}
+
+/*********************** BODY CONTAINER ***********************************/
+
+.footer-container {
+  width: 100%;
+  height: 15%;
+}
+
+.next-question-btn {
+  text-align: center;
+  width: auto;
+  height: 60%;
+  border: 1px solid #71f5fc;
+  color: white;
+  padding: 15px;
+}
+
+.next-question-btn:hover {
+  background-position: 0 0;
+}
+
+/*********************** RESULT ***********************************/
+
+.title-disease {
+  font-size: 2.2vw;
+}
+
+.result-subtitle {
+  font-size: 1.6vw;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/*********************** UTILS ***********************************/
+
+.fs-1-4vw {
+  font-size: 1.4vw;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.flex {
+  display: flex;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.flex-end {
+  justify-content: flex-end;
+}
+
+.mt-15px {
+  margin-top: 15px;
+}
+
+.mb-15px {
+  margin-bottom: 15px;
+}
+
+.px-15px {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.overflow-y {
+  overflow-y: auto;
+}
+
+.overflow-x-none {
+  overflow-x: hidden;
+}
+
+.overflow-none {
+  overflow: hidden;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.crs-pointer {
+  cursor: pointer;
+}
+
+.bg-animation {
+  background: linear-gradient(to right, #019ea9 0%, #019ea9 50%, #00cedb 50%, #00cedb 100%);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  transition: background-position 0.5s;
+}
+
+.active-answer {
+  background-position: 0 0;
+}
+
+.bg-disabled {
+  background-color: #76d0d68a;
+}
+
+.pr {
+  position: relative
+}
+
+.py-15px {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.pt-30px {
+  padding-top: 30px;
+}
+
+.mt-30px {
+  margin-top: 30px;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.w-90 {
+  width: 90%;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-70 {
+  width: 70%;
+}
+
+.w-10 {
+  width: 10%;
+}
+
+.h-10 {
+  height: 10%;
+}
+
+.h-25 {
+  height: 25%;
+}
+
+.h-30 {
+  height: 30%;
+}
+
+.h-60 {
+  height: 60%;
+}
+
+.h-75 {
+  height: 75%;
+}
+
+.h-auto {
+  height: auto;
+}
+
+.txt-center {
+  text-align: center;
+}
+
+.bg-none {
+  background: none;
+}
+
+.txt-white {
+  color: white;
+  font-weight: regular;
+}
+
+.px-40px {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.d-none {
+  display: none;
+}
+
+.d-inline {
+  display: inline-block;
+}
+
+.d-block {
+  display: block;
+}
+
+.border-none {
+  border: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #A2F1F5;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to right, #019ea9 0%, #1ae0ee 50%, #0bd1df 50%, #00cedb 100%);
 }
