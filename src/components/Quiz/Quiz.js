@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
 import { Animate, AnimateGroup } from "react-simple-animate"
 import { Wave } from "react-animated-text"
 import { Link } from "react-router-dom"
+import parser from "html-react-parser"
 
-import { QUESTIONS_ARRAY, DISEASES_ARRAY, TOTAL_PROGRESS_300_PERCENT, ADD_PROGRESS_10_PERCENT, DEFAULT_DURATION, TEXT_INSTRUCTIONS, TEXT_DISEASES_LIST, TEXT_RESULT_QUIZ, TRANSLATE_START_EFFECT, TRANSLATE_END_EFFECT, EASE_TYPE_EFFECT, EXIT_QUIZ_TEXT, NEXT_TEXT, MIN_SELECTED_DISEASES } from './LocalConstants'
+import { QUESTIONS_ARRAY, DISEASES_ARRAY, TOTAL_PROGRESS_300_PERCENT, ADD_PROGRESS_10_PERCENT, DEFAULT_DURATION, TEXT_INSTRUCTIONS, TEXT_DISEASES_LIST, TEXT_RESULT_QUIZ, TRANSLATE_START_EFFECT, TRANSLATE_END_EFFECT, EASE_TYPE_EFFECT, EXIT_QUIZ_TEXT, NEXT_TEXT, MIN_SELECTED_DISEASES, MIN_DISEASES_POND, NO_DISEASE } from './LocalConstants'
 import { SET_FALSE, SET_NULL, SET_TRUE, SET_ZERO, SET_ONE, EMPTY_ARRAY, ONE_THOUSAND, FIVE_HUNDRED, TWO_HUNDRED_FIFTY, DIAGNOSIS_TEXT, TYPE_QUIZ_GENERAL, TYPE_QUIZ_SPECIFIC } from '../GlobalConstants'
 
 import ProgressBar from '../reusable/ProgressBar/ProgressBar'
@@ -44,6 +45,10 @@ class Quiz extends Component {
     }
     this.diseaseName = SET_NULL
     this.imagePath = SET_NULL
+    this.description = ''
+    this.causes = ''
+    this.treatment = ''
+    this.referenceLink = ''
     this.images = {
       brainImg,
       amnesia,
@@ -264,18 +269,26 @@ class Quiz extends Component {
           <article>
             <h3 className="result-subtitle bold">{TEXT_RESULT_QUIZ.subtitle1}</h3>
             <p className="py-15px txt-white">
-              Los proveedores de atención médica no conocen la causa exacta del TOC. Los factores que pueden influir incluyen lesiones en la cabeza, infecciones y funcionamiento anormal en ciertas zonas del cerebro. Los genes (antecedentes familiares) parecen jugar un fuerte papel. Los antecedentes de abuso físico o sexual también parecen incrementar el riesgo de TOC.
-              Los padres y los profesores a menudo reconocen los síntomas del TOC en los niños. La mayoría de las personas recibe un diagnóstico a los 19 o 20, pero algunas no muestran síntomas hasta la edad de 30 años.
-          </p>
+              {parser(this.description)}
+              {/* Los proveedores de atención médica no conocen la causa exacta del TOC. Los factores que pueden influir incluyen lesiones en la cabeza, infecciones y funcionamiento anormal en ciertas zonas del cerebro. Los genes (antecedentes familiares) parecen jugar un fuerte papel. Los antecedentes de abuso físico o sexual también parecen incrementar el riesgo de TOC. */}
+              {/* Los padres y los profesores a menudo reconocen los síntomas del TOC en los niños. La mayoría de las personas recibe un diagnóstico a los 19 o 20, pero algunas no muestran síntomas hasta la edad de 30 años. */}
+            </p>
           </article>
           <article>
             <h3 className="result-subtitle bold">{TEXT_RESULT_QUIZ.subtitle2}</h3>
             <p className="py-15px txt-white">
-              El TOC se trata utilizando una combinación de medicamentos y terapia conductual.
-              Los medicamentos empleados incluyen antidepresivos, antipsicóticos y estabilizadores del estado de ánimo.
-              La psicoterapia (terapia cognitiva conductual o TCC) ha demostrado ser efectiva para este trastorno. Durante la terapia, la persona es expuesta muchas veces a una situación que desencadena los pensamientos obsesivos y aprende gradualmente a tolerar la ansiedad y resistir las ganas de llevar a cabo el acto compulsivo. La terapia también se puede utilizar para reducir el estrés y la ansiedad, y resolver conflictos internos.
-          </p>
+              {parser(this.causes)}
+            </p>
           </article>
+          <article>
+            <h3 className="result-subtitle bold">{TEXT_RESULT_QUIZ.subtitle3}</h3>
+            <p className="py-15px txt-white">
+              {parser(this.treatment)}
+            </p>
+          </article>
+          <p className="txt-white">
+            Para más información de clic <a href={this.referenceLink} target="_blank">aquí</a>
+          </p>
         </div>
       </div>
     )
@@ -293,25 +306,34 @@ class Quiz extends Component {
     for (let i = SET_ZERO; i < diseasesToAnalyzeArr.length; i++) {
       const result = [...EMPTY_ARRAY]
       for (let j = SET_ZERO; j < this.state.responsesArr.length; j++) {
-        const currentPonderationDisease = diseasesToAnalyzeArr[i].ponderation[j]
+        const currentPonderationDisease = diseasesToAnalyzeArr[i].weights[j]
         const currentPonderation = this.state.responsesArr[j]
         result.push((currentPonderation > currentPonderationDisease) ? currentPonderationDisease : currentPonderation)
       }
       resultArr.push(result)
     }
-    
+
     let finalResultArr = [SET_ZERO, SET_NULL]
-    for(let i = SET_ZERO; i < resultArr.length; i++) {
+    for (let i = SET_ZERO; i < resultArr.length; i++) {
       const totalSum = resultArr[i].reduce((a, b) => a + b)
-      if(totalSum > finalResultArr[SET_ZERO]) {
-        const {name, imagePath} = this.state.diseasesArr[i]
-        finalResultArr = [totalSum, name, imagePath]
+      if (totalSum > finalResultArr[SET_ZERO]) {
+        const { name, imagePath, definition, causes, treatment, reference } = diseasesToAnalyzeArr[i]
+        finalResultArr = [totalSum, name, imagePath, definition, causes, treatment, reference]
       }
     }
 
-    const [sum, name, imagePath] = finalResultArr 
+    const [sum, name, imagePath, definition, causes, treatment, reference] = finalResultArr
+    if (sum <= MIN_DISEASES_POND) {
+      this.diseaseName = NO_DISEASE
+      this.imagePath = brainImg
+      return null
+    }
     this.diseaseName = name
     this.imagePath = imagePath
+    this.description = definition
+    this.causes = causes
+    this.treatment = treatment
+    this.referenceLink = reference
   }
 
   render() {

@@ -26,7 +26,7 @@ class QuizAnswer extends Component {
 
   render() {
     return (
-      <div className={`answer-btn mt-15px px-15px w-90 center crs-pointer bg-animation${this.state.activeAnswer ? ' active-answer' : ''}`} onClick={this.handleClickAnswer}>{this.props.answer}</div>
+      <div className={`txt-center answer-btn mt-15px px-15px w-90 center crs-pointer bg-animation${this.state.activeAnswer ? ' active-answer' : ''}`} onClick={this.handleClickAnswer}>{this.props.answer}</div>
     )
   }
 }
