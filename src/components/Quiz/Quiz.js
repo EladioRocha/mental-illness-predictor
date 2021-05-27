@@ -134,6 +134,7 @@ class Quiz extends Component {
 
   handleInfoContainer = () => {
     if (!this.state.activeQuiz && !this.state.showDiseasesList) {
+      console.log("Entro y salio")
       return this.instructionsQuiz()
     } else if (!this.state.activeQuiz && this.state.showDiseasesList) {
       return this.diseasesList()
@@ -233,16 +234,19 @@ class Quiz extends Component {
     )
   }
 
-  resultElements = () => {
+  resultElements =  () => {
     if (this.state.totalProgress < TOTAL_PROGRESS_300_PERCENT /** El 300% por el delay y el timer **/) {
       setTimeout(() => {
-        const sumProgress = this.state.totalProgress + ADD_PROGRESS_10_PERCENT
+        console.log("Hola mundo")
+        const sumProgress = this.state.totalProgress + 0.34
         this.setState({
           progressResult: (sumProgress >= SET_ONE) ? SET_ONE : sumProgress,
           totalProgress: sumProgress,
           processedData: SET_TRUE
         })
-      }, ONE_THOUSAND)
+      }, 1000)
+      console.log('jejeje')
+      // await this.delay(ONE_THOUSAND)
       return (
         <div className="pr h-100">
           <div className="h-100">
