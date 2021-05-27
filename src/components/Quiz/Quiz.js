@@ -4,7 +4,7 @@ import { Wave } from "react-animated-text"
 import { Link } from "react-router-dom"
 import parser from "html-react-parser"
 
-import { QUESTIONS_ARRAY, DISEASES_ARRAY, TOTAL_PROGRESS_300_PERCENT, ADD_PROGRESS_10_PERCENT, DEFAULT_DURATION, TEXT_INSTRUCTIONS, TEXT_DISEASES_LIST, TEXT_RESULT_QUIZ, TRANSLATE_START_EFFECT, TRANSLATE_END_EFFECT, EASE_TYPE_EFFECT, EXIT_QUIZ_TEXT, NEXT_TEXT, MIN_SELECTED_DISEASES, MIN_DISEASES_POND, NO_DISEASE } from './LocalConstants'
+import { QUESTIONS_ARRAY, DISEASES_ARRAY, TOTAL_PRGROESS, ADD_PROGRESS, DEFAULT_DURATION, TEXT_INSTRUCTIONS, TEXT_DISEASES_LIST, TEXT_RESULT_QUIZ, TRANSLATE_START_EFFECT, TRANSLATE_END_EFFECT, EASE_TYPE_EFFECT, EXIT_QUIZ_TEXT, NEXT_TEXT, MIN_SELECTED_DISEASES, MIN_DISEASES_POND, NO_DISEASE } from './LocalConstants'
 import { SET_FALSE, SET_NULL, SET_TRUE, SET_ZERO, SET_ONE, EMPTY_ARRAY, ONE_THOUSAND, FIVE_HUNDRED, TWO_HUNDRED_FIFTY, DIAGNOSIS_TEXT, TYPE_QUIZ_GENERAL, TYPE_QUIZ_SPECIFIC } from '../GlobalConstants'
 
 import ProgressBar from '../reusable/ProgressBar/ProgressBar'
@@ -235,16 +235,16 @@ class Quiz extends Component {
   }
 
   resultElements =  () => {
-    if (this.state.totalProgress < TOTAL_PROGRESS_300_PERCENT /** El 300% por el delay y el timer **/) {
+    if (this.state.totalProgress < TOTAL_PRGROESS /** El 300% por el delay y el timer **/) {
       setTimeout(() => {
         console.log("Hola mundo")
-        const sumProgress = this.state.totalProgress + 0.34
+        const sumProgress = this.state.totalProgress + ADD_PROGRESS
         this.setState({
           progressResult: (sumProgress >= SET_ONE) ? SET_ONE : sumProgress,
           totalProgress: sumProgress,
           processedData: SET_TRUE
         })
-      }, 1000)
+      }, ONE_THOUSAND)
       console.log('jejeje')
       // await this.delay(ONE_THOUSAND)
       return (
