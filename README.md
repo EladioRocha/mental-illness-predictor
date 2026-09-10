@@ -1,3 +1,39 @@
+# mental-illness-predictor
+
+Interfaz experimental en React relacionada con predicción de enfermedades mentales. Este repositorio contiene el frontend; su nombre y una demo no acreditan validación clínica ni precisión diagnóstica.
+
+## Estructura
+
+- [public](public)
+- [src](src)
+
+## Preparación y uso
+
+### Raíz del repositorio
+
+Requiere Node.js. Este paquete no fija una versión del runtime; valida compatibilidad con las dependencias antes de actualizarlo.
+
+```sh
+npm ci
+npm run start
+```
+
+Comandos declarados en [package.json](package.json):
+
+| Comando | Acción |
+| --- | --- |
+| `npm run start` | `react-scripts start` |
+| `npm run build` | `react-scripts build` |
+| `npm run test` | `react-scripts test` |
+
+## Validación y estado
+
+Esta guía se contrastó con el árbol de archivos y los manifiestos del repositorio. No se ha validado una ejecución completa contra servicios externos, bases de datos o hardware. Las versiones y los scripts mostrados describen el código actual; no implican que sus dependencias antiguas sigan siendo compatibles.
+
+## Documentación previa
+
+Se conserva como referencia histórica, incluidas las imágenes y atribuciones originales. Los enlaces a demos y servicios no se han comprobado.
+
 # Demo
 
 click in [**DEMO**](https://mental-illness-ia.herokuapp.com/) to see.
