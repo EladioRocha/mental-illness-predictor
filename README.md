@@ -1,110 +1,42 @@
-# mental-illness-predictor
+# Mental Health Questionnaire — React Prototype
 
-Interfaz experimental en React relacionada con predicción de enfermedades mentales. Este repositorio contiene el frontend; su nombre y una demo no acreditan validación clínica ni precisión diagnóstica.
+An educational **React questionnaire interface** with animated questions and a local scoring routine. Despite the repository name, the source uses predefined question weights, not a trained prediction model or a backend inference API.
 
-## Estructura
+## Run locally
 
-- [public](public)
-- [src](src)
-
-## Preparación y uso
-
-### Raíz del repositorio
-
-Requiere Node.js. Este paquete no fija una versión del runtime; valida compatibilidad con las dependencias antes de actualizarlo.
+Use Node.js and npm, then run from the repository root:
 
 ```sh
 npm ci
-npm run start
+npm start
 ```
 
-Comandos declarados en [package.json](package.json):
+Open `http://localhost:3000`. The application uses React 17 and Create React App 4 tooling; no Node.js version is pinned. Compatibility work may be needed on newer environments.
 
-| Comando | Acción |
+## Application flow
+
+- `/` displays the home screen.
+- `/quiz` presents the questionnaire, with general and selected-category modes.
+- Answers are compared against predefined weights in the browser.
+- The highest scoring category above the configured threshold supplies the result content.
+
+This scoring is an application demonstration, not a clinically validated diagnosis. The repository does not contain model-training data, clinical validation, or evidence of diagnostic accuracy.
+
+## Where to make changes
+
+| Path | Purpose |
 | --- | --- |
-| `npm run start` | `react-scripts start` |
-| `npm run build` | `react-scripts build` |
-| `npm run test` | `react-scripts test` |
+| [src/App.js](src/App.js) | Browser routes. |
+| [src/components/Home](src/components/Home) | Introductory screen. |
+| [src/components/Quiz/Quiz.js](src/components/Quiz/Quiz.js) | State, scoring, and result rendering. |
+| [src/components/Quiz/LocalConstants.js](src/components/Quiz/LocalConstants.js) | Questions, category weights, and content. |
+| [src/components/QuizAnswer](src/components/QuizAnswer) | Answer interaction. |
+| [src/components/reusable/ProgressBar](src/components/reusable/ProgressBar) | Progress display. |
 
-## Validación y estado
+The application content remains in its original language; this update translates the repository documentation.
 
-Esta guía se contrastó con el árbol de archivos y los manifiestos del repositorio. No se ha validado una ejecución completa contra servicios externos, bases de datos o hardware. Las versiones y los scripts mostrados describen el código actual; no implican que sus dependencias antiguas sigan siendo compatibles.
+## Build and checks
 
-## Documentación previa
+`npm run build` produces the static `build` directory. A static host must route requests such as `/quiz` back to `index.html` for BrowserRouter navigation.
 
-Se conserva como referencia histórica, incluidas las imágenes y atribuciones originales. Los enlaces a demos y servicios no se han comprobado.
-
-# Demo
-
-click in [**DEMO**](https://mental-illness-ia.herokuapp.com/) to see.
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+`npm test` launches the test runner. The existing [src/App.test.js](src/App.test.js) still looks for the default Create React App “learn react” text and does not validate questionnaire scoring. Tests and a production build were not run for this documentation-only update. The old Heroku demo is not used as evidence of a working deployment.
